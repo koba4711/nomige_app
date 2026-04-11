@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="tp-page" id="tpPage">
+    <div class="status-panel">
+        <p class="eyebrow">地球1周までの残り</p>
+        <h1 id="remainingKm">40,075.0 km</h1>
+        <p id="stageMessage">ようこそ。まだ何も始まっていない。</p>
+    </div>
+
+    <div class="game-area" id="gameArea">
+        <div class="roll-wrapper">
+            <div class="roll" id="roll"></div>
+            <div class="paper-start"></div>
+        </div>
+
+        <div class="paper-lane">
+            <div class="paper-strip" id="paperStrip"></div>
+        </div>
+    </div>
+
+    <div class="instruction-panel">
+        <p>下にドラッグ / スワイプして紙を引き出す。</p>
+        <p>指やマウスを離すと、その回の進捗はゼロに戻る。</p>
+        <p>PCではマウスドラッグ、スマホではスワイプで操作できる。</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.APP_CONFIG = {
+        initialKm: 40075.0,
+        kmPerPixel: 0.03
+    };
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

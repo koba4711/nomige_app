@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_info.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo">{{ app_info.name }}</a>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/about">概要</a></li>
+                    <li><a href="/how-to-play">遊び方</a></li>
+                    <li><a href="/contact">問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>{{ app_info.name }} | {{ app_info.university }} | ver {{ app_info.version }}</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
