@@ -12,6 +12,7 @@ const paperStrip = document.getElementById("paperStrip");
 const roll = document.getElementById("roll");
 const remainingKmEl = document.getElementById("remainingKm");
 const stageMessageEl = document.getElementById("stageMessage");
+const MAX_VISIBLE_PAPER = 1200;
 
 let isDragging = false;
 let startY = 0;
@@ -46,7 +47,8 @@ function updateRemaining() {
 }
 
 function updatePaper() {
-    const height = 260 + pulledPixels;
+    const visiblePixels = Math.min(pulledPixels, MAX_VISIBLE_PAPER);
+    const height = 260 + visiblePixels;
     paperStrip.style.height = `${height}px`;
 }
 
