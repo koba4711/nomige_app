@@ -103,6 +103,11 @@ function startDrag(clientY) {
     stopInertia();
     stopRollback();
 
+    if (idleTimer) {
+        clearTimeout(idleTimer);
+        idleTimer = null;
+    }
+
     isDragging = true;
     startY = clientY;
     lastY = clientY;
@@ -130,6 +135,17 @@ function moveDrag(clientY) {
     lastMoveTime = now;
 }
 
+// === 追加 ===
+let idleTimer = null;
+const IDLE_DELAY = 5000; // 5秒
+
+function resetIdleTimer() {
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+        startRollback();
+    }, IDLE_DELAY);
+}
+
 function startInertia() {
     stopInertia();
 
@@ -140,7 +156,7 @@ function startInertia() {
         if (inertiaVelocity <= 0.2) {
             inertiaVelocity = 0;
             inertiaTimer = null;
-            startRollback();
+            resetIdleTimer();
             return;
         }
 
@@ -155,19 +171,20 @@ function startInertia() {
     inertiaTimer = requestAnimationFrame(step);
 }
 
+const ROLLBACK_SPEED = 3; // px/frame
+
 function startRollback() {
     stopRollback();
 
     function step() {
-        if (pulledPixels <= 0.5) {
+        if (pulledPixels <= 0) {
             pulledPixels = 0;
             syncUI();
             rollbackTimer = null;
             return;
         }
 
-        // 戻り速度：大きいほど早く戻る
-        pulledPixels *= 0.92;
+        pulledPixels -= ROLLBACK_SPEED;
         syncUI();
 
         rollbackTimer = requestAnimationFrame(step);
@@ -180,11 +197,10 @@ function endDrag() {
     if (!isDragging) return;
     isDragging = false;
 
-    // 下方向の勢いだけ使う
     if (inertiaVelocity > 0.3) {
         startInertia();
     } else {
-        startRollback();
+        resetIdleTimer();
     }
 }
 
@@ -197,6 +213,7 @@ function getClientY(event) {
     }
     return event.clientY;
 }
+
 
 // PC
 gameArea.addEventListener("mousedown", (event) => {

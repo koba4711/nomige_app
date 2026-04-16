@@ -153,19 +153,13 @@ body {
 }
 
 .roll {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
     background:
         radial-gradient(circle at center,
-            var(--roll-inner) 0 18%,
-            #cbd5e1 18% 30%,
-            #f8fafc 30% 48%,
-            #e5e7eb 48% 60%,
-            var(--roll-outer) 60% 100%);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
-    transform: rotate(0deg);
-    transition: transform 0.06s linear;
+            #94a3b8 0 10%,
+            #e2e8f0 10% 25%,
+            #ffffff 25% 45%,
+            #e5e7eb 45% 70%,
+            #cbd5f5 70% 100%);
 }
 
 .paper-start {
@@ -182,40 +176,29 @@ body {
     bottom: 38px;
     width: 100%;
     height: 260px;
+
     background:
         repeating-linear-gradient(
             180deg,
-            rgba(0,0,0,0.025) 0,
-            rgba(0,0,0,0.025) 1px,
-            rgba(255,255,255,0.96) 1px,
-            rgba(255,255,255,0.98) 22px
+            rgba(0,0,0,0.03) 0px,
+            rgba(0,0,0,0.03) 1px,
+            #ffffff 1px,
+            #ffffff 20px
         );
-    border-left: 1px solid var(--paper-edge);
-    border-right: 1px solid var(--paper-edge);
-    border-top: 1px dashed #cbd5e1;
-    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.10);
-    transform-origin: bottom center;
+
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+
+    box-shadow:
+        inset 0 0 8px rgba(0,0,0,0.05),
+        0 8px 20px rgba(0,0,0,0.1);
+
+    border-radius: 2px;
 }
 
 .paper-tip {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(220px, 42vw);
-    height: 38px;
-    background: linear-gradient(180deg, #ffffff, #f3f4f6);
-    border: 1px solid var(--paper-edge);
-    border-radius: 0 0 14px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #64748b;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    z-index: 4;
+    border-top: 2px dashed #bbb;
 }
-
 
 .site-footer {
     background: rgba(15, 23, 42, 0.94);
